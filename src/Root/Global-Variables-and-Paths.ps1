@@ -1,4 +1,4 @@
-# globals.ps1 (example)
+# Global-Variables-and-Paths.ps1 (example)
 
 #region Global Variables and Constants
 
@@ -34,3 +34,4 @@ $Global:DrLogFile = $null
 $Global:DrTimers = $null
 
 #endregion
+
