@@ -63,3 +63,5 @@ Initialize-Job -Subject "V4 Save-ApiKey" -IssueType 'Automation' -InitialIssue "
 Add-LogEntry "API key has been saved." -Icon 'lockandkey' -Buffer $Global:DrLogSummaryBuffer
 
 Add-LogEntry "📤 DrModule has been downloaded" -Icon 'download' -Buffer $Global:DrLogSummaryBuffer -FlushBuffer
+
+Complete-Job
