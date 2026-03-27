@@ -55,11 +55,11 @@ $apiKey = 'YOURAPIKEYGOESHERE'
 
 Save-ApiKey -ApiKey $apiKey
 
-Import-Module "C:\ProgramData\Syncro\DrOsdicks\bin\DrModuleV4.psm1" -DisableNameChecking
+Import-Module "C:\ProgramData\Syncro\DrOsdicks\bin\DrModule.psm1" -DisableNameChecking
 
 #Initialize-Job "v4 Save-ApiKey" -NoNewTicket
 Initialize-Job -Subject "V4 Save-ApiKey" -IssueType 'Automation' -InitialIssue "This is the first test." 
 
 Add-LogEntry "API key has been saved." -Icon 'lockandkey' -Buffer $Global:DrLogSummaryBuffer
 
-Add-LogEntry "📤 DrModuleV4 has been downloaded" -Icon 'download' -Buffer $Global:DrLogSummaryBuffer -FlushBuffer
+Add-LogEntry "📤 DrModule has been downloaded" -Icon 'download' -Buffer $Global:DrLogSummaryBuffer -FlushBuffer
