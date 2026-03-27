@@ -10,6 +10,6 @@ Download the full module DrModuleV4000.psm1
 
 Upload the module to the repository.
 
-Add the file to the Syncro script you created for Save-Api. Dowload the file to here: C:\ProgramData\Syncro\DrOsdicks\bin\DrModuleV4.psm1
+Add the file to the Syncro script you created for Save-Api. Dowload the file to here: C:\ProgramData\Syncro\DrOsdicks\bin\DrModule.psm1
 
 Run the Save-ApiKey script on your test pc. 
