@@ -1,447 +1,949 @@
-New-DrDomainUser.ps1
+# Function Reference
 
-Test-IsElevated.ps1
+This document provides a categorized reference for functions currently available in DrModuleV4.
 
-Assert-IsAdmin.ps1
+Module version referenced: `4.0.95`
 
-Get-FastBootSetting.ps1
+Descriptions are intentionally short. This file is meant to be a quick reference, not full command documentation.
 
-Set-FastBootSetting.ps1
+---
 
-New-Ticket.ps1
+# Core Framework
 
-New-DrPassword.ps1
+### Initialize-Environment
+Initializes the DrModuleV4 runtime environment, folders, paths, ticket context, timers, and framework defaults.
 
-Call-KabutoApi.ps1
+### Initialize-Job
+Starts a job context, optionally creates or associates a Syncro ticket, and configures logging and job-level settings.
 
-Invoke-DrApiRequest.ps1
+### Complete-Job
+Finalizes a job, flushes remaining buffers, archives generated files, and uploads output to the associated Syncro ticket when available.
 
-Convert-GraphToPs.ps1
+### Initialize-DrFunction
+Applies common function startup logic, including metadata-based checks and framework validation.
 
-Send-DrAlert.ps1
+### Complete-DrFunctionState
+Completes tracked function state after execution.
 
-Resolve-DrAlert.ps1
+### Fail-DrFunction
+Marks the current function state as failed.
 
-Send-DrEmail.ps1
+### Test-DrFunctionState
+Tests framework function state tracking.
 
-Send-DrFile.ps1
+### Test-DrOperatingSystem
+Validates OS include/exclude restrictions from recommendation metadata.
 
-Add-LogEntry1.ps1
+### Assert-MaintenanceWindow
+Checks whether execution is currently allowed based on maintenance window rules.
 
-Add-LogEntry.ps1
+### Assert-InteractiveSession
+Ensures execution is running in an interactive user session when required.
 
-Update-LogBuffer.ps1
+### Assert-IsAdmin
+Checks whether the current session has administrative privileges.
 
-Update-LogBuffer1.ps1
+### Test-IsElevated
+Tests whether the current process token is elevated.
 
-Add-TicketComment.ps1
+### IsUserAdmin
+Checks whether the current user has administrative privileges.
 
-Log-DrActivity.ps1
+---
 
-Log-Invocation.ps1
+# Logging
 
-New-LogFile.ps1
+### Add-LogEntry
+Core framework logging function used for host output, file logging, ticket output, buffering, icons, and summaries.
 
-Get-LogIcon.ps1
+### Update-LogBuffer
+Adds to, manages, and flushes named log buffers.
 
-Initialize-Environment.ps1
+### Add-TicketComment
+Adds a comment to a Syncro ticket.
 
-Initialize-Job.ps1
+### Log-DrActivity
+Records structured activity data.
 
-Complete-Job.ps1
+### Log-Invocation
+Logs function invocation details.
 
-Get-ProgressionRules.ps1
+### Log-InvocationV2
+Enhanced function invocation logging with metadata support.
 
-Add-ProgressionRule.ps1
+### New-LogFile
+Creates or opens a framework log file.
 
-Evaluate-Progression.ps1
+### Convert-LogIconKey
+Converts a configured icon key into the matching visual glyph.
 
-Reset-ProgressionRules.ps1
+### Get-LogEntryParams
+Builds standardized logging parameter sets for details and summary entries.
 
-Get-StorageSenseSettingsObject.ps1
+### Log-ObjProperties
+Logs object properties in a structured format.
 
-Apply-StorageSenseSettings.ps1
+### Write-ObjProperties
+Writes object properties in a readable structured format.
 
-Configure-OneDriveStoragePolicy.ps1
+---
 
-Set-StorageSense.ps1
+# System Variables and Configuration
 
-Show-StorageSensePresets.ps1
+### Initialize-VariableStore
+Initializes the persistent variable store.
 
-Get-StorageSenseSettings.ps1
+### Initialize-SysVarsFromFile
+Loads system variables from the variable store.
 
-Initialize-VariableStore.ps1
+### Get-SysVar
+Returns a system variable by name.
 
-Set-SysVar.ps1
+### Get-SysVarList
+Lists available system variables.
 
-Get-SysVar.ps1
+### Set-SysVar
+Creates or updates a system variable.
 
-Remove-SysVar.ps1
+### Remove-SysVar
+Removes a system variable.
 
-Get-SysVarList.ps1
+### Update-JobPathsAfterTicket
+Updates job folder paths after a ticket number becomes available.
 
-Initialize-SysVarsFromFile.ps1
+---
 
-Update-JobPathsAfterTicket.ps1
+# Recommendations
 
-Get-DrDiskInfo.ps1
+### Add-DrRecommendation
+Creates a DrModule recommendation.
 
-Get-StorageSummary.ps1
+### Get-DrRecommendations
+Returns stored recommendations.
 
-Get-StorageHealth0.ps1
+### Get-DrRecommendationExecutionMetadata
+Reads execution metadata for a recommendation-capable command.
 
-Get-StorageMetrics.ps1
+### Approve-DrRecommendation
+Approves one or more recommendations for execution.
 
-Get-StorageMetrics0.ps1
+### Unapprove-DrRecommendation
+Removes approval from a recommendation.
 
-Get-ReclaimedStorage.ps1
+### Run-DrRecommendation
+Runs a specific recommendation.
 
-Get-StorageHealth.ps1
+### Run-DrRecommendations
+Runs approved recommendations or a selected recommendation.
 
-Get-ReclaimedStorageHealth.ps1
+### Invoke-DrRecommendation
+Invokes a recommendation action.
 
-Get-LocalAccountSnapshot.ps1
+### Invoke-DrRecommendations
+Invokes recommendation processing.
 
-Compare-AccountSnapshots1.ps1
+### Show-DrRecommendations
+Displays recommendation details.
 
-Compare-AccountSnapshots.ps1
+### Show-DrRecommendationsSummary
+Displays a recommendation summary.
 
-Get-LocalAccountBaseline.ps1
+### Get-DrRecommendationSummary
+Returns recommendation counts and summary information.
 
-Open-Ticket.ps1
+### Get-DrRecommendationResults
+Returns recommendation execution results.
 
-Close-Ticket.ps1
+### Complete-DrRecommendation
+Marks a recommendation as completed and records execution results.
 
-Get-TicketIdFromNumber.ps1
+### Complete-DrRecommendationSummary
+Completes recommendation summary reporting.
 
-Get-Ticket.ps1
+### Clone-DrRecommendation
+Duplicates an existing recommendation.
 
-Update-Ticket.ps1
+### Remove-DrRecommendationByNumericId
+Removes a recommendation by numeric ID.
 
-Get-LoggedInUser.ps1
+### Reset-DrRecommendations
+Clears recommendation data.
 
-Get-LogEntryParams.ps1
+### Reset-DrRecommendationExecutionMetadata
+Resets execution metadata for recommendations.
 
-Ensure-Folder.ps1
+### Resolve-DrCommandToRun
+Builds a runnable command from recommendation data and metadata.
 
-Test-UEFIBoot.ps1
+---
 
-Update-JobPathsAfterTicket.ps1
+# Progression Rules
 
-DrRecommendation.ps1
+### Get-ProgressionRules
+Returns configured progression rules.
 
-Export.ps1
+### Add-ProgressionRule
+Adds a function progression rule.
 
-Validate.ps1
+### Evaluate-Progression
+Evaluates whether a completed action should trigger another recommendation.
 
-MarkExecuted.ps1
+### Reset-ProgressionRules
+Clears progression rules.
 
-ToLogEntry.ps1
+---
 
-ToSummary.ps1
+# Syncro API and Ticketing
 
-GetNextNumericId.ps1
+### Invoke-DrApiRequest
+Performs Syncro API requests.
 
-Save.ps1
+### Call-KabutoApi
+Calls Syncro RMM API endpoints.
 
-Delete.ps1
+### Send-DrAlert
+Creates or sends a Syncro alert.
 
-Approve.ps1
+### Resolve-DrAlert
+Resolves a Syncro alert.
 
-Unapprove.ps1
+### Send-DrEmail
+Sends an email through Syncro-related automation.
 
-Run.ps1
+### Send-DrFile
+Uploads a file using the configured file pusher.
 
-IsDuplicateCommand.ps1
+### Open-Ticket
+Creates and initializes a Syncro ticket.
 
-Clone.ps1
+### New-Ticket
+Creates a Syncro ticket.
 
-Add-DrRecommendation.ps1
+### Close-Ticket
+Closes a Syncro ticket.
 
-Remove-DrRecommendationByNumericId.ps1
+### Get-Ticket
+Retrieves ticket details.
 
-Get-DrRecommendations.ps1
+### Get-TicketIdFromNumber
+Resolves a Syncro ticket ID from a ticket number.
 
-Get-Recommendation.ps1
+### Update-Ticket
+Updates ticket fields such as status, subject, priority, or tags.
 
-Test-DrRecommendation.ps1
+### Add-TicketFile
+Uploads a file to a Syncro ticket.
 
-Approve-DrRecommendation.ps1
+### Add-DrTicketTimerEntry
+Adds a time entry to a Syncro ticket.
 
-Run-DrRecommendation.ps1
+### Get-TicketAssetIds
+Returns asset IDs associated with a ticket.
 
-Run-DrRecommendations.ps1
+### Get-SyncroTicketComments
+Retrieves Syncro ticket comments.
 
-Clone-DrRecommendation.ps1
+### ConvertTo-AITicketComments
+Formats ticket comments for AI summary use.
 
-Unapprove-DrRecommendation.ps1
+### Log-AITicketSummary
+Logs an AI-generated or AI-formatted ticket summary.
 
-Show-DrRecommendationsSummary.ps1
+---
 
-Get-DrRecommendationSummary.ps1
+# Syncro Customers and Assets
 
-Reset-DrRecommendations.ps1
+### New-DrCustomer
+Creates a Syncro customer record.
 
-Get-DrRecommendationResults.ps1
+### Update-DrCustomer
+Updates a Syncro customer record.
 
-Show-DrRecommendations.ps1
+### Get-DrCustomer
+Retrieves Syncro customer information.
 
-Load-DrTimers.ps1
+### Update-CustomerFields
+Updates customer custom fields.
 
-Save-DrTimers.ps1
+### New-DrAsset
+Creates a Syncro asset record.
 
-Start-DrTimer.ps1
+### Get-Asset
+Retrieves asset information.
 
-Pause-DrTimer.ps1
+### Update-Asset
+Updates asset information.
 
-Resume-DrTimer.ps1
+### Set-AssetField
+Updates a Syncro asset custom field.
 
-Stop-DrTimer.ps1
+### Set-AssetTicket
+Stores the current ticket number on the asset.
 
-Reset-DrTimer.ps1
+### Get-DrCustomerAssets
+Returns assets for a customer.
 
-Add-DrTimerToTicket.ps1
+### Get-SyncroAssetByName
+Finds a Syncro asset by name.
 
-Get-DrTimer.ps1
+### Set-DrAssetIdRegistry
+Stores Syncro asset ID information in the registry.
 
-Get-DrTimers.ps1
+### Get-DrAssetIdRegistry
+Reads stored Syncro asset ID information from the registry.
 
-Get-DrTimersSummary.ps1
+---
 
-Remove-DrTimer.ps1
+# Job Timers and Duration
 
-Add-DrTimerMessage.ps1
+### Load-DrTimers
+Loads timer data from storage.
 
-Get-DrTimerMessagesString.ps1
+### Save-DrTimers
+Saves timer data to storage.
 
-Get-DrContent.ps1
+### Start-DrTimer
+Starts a named timer.
 
-New-DrCustomer.ps1
+### Pause-DrTimer
+Pauses a named timer.
 
-New-DrAsset.ps1
+### Resume-DrTimer
+Resumes a named timer.
 
-Update-DrCustomer.ps1
+### Stop-DrTimer
+Stops a named timer.
 
-Update-CustomerFields.ps1
+### Reset-DrTimer
+Resets a named timer.
 
-Get-Alerts.ps1
+### Remove-DrTimer
+Removes timer data.
 
-Compare-Version.ps1
+### Get-DrTimer
+Returns timer details.
 
-Clear-DiskSpace.ps1
+### Get-DrTimers
+Returns all timers.
 
-Start-SFC.ps1
+### Get-DrTimersSummary
+Returns timer summary information.
 
-Start-ChkDsk.ps1
+### Add-DrTimerToTicket
+Adds timer information to a Syncro ticket.
 
-Get-CPUTemperature.ps1
+### Add-DrTimerMessage
+Adds a message to a timer.
 
-Test-CPUTemperature.ps1
+### Get-DrTimerMessagesString
+Returns timer messages as text.
 
-IsUserAdmin.ps1
+### Log-Duration
+Logs elapsed duration between start and end times.
 
-Assert-InteractiveSession.ps1
+### Add-DrDurationToTimer
+Adds a duration object to timer tracking.
 
-Restart-DrComputer.ps1
+---
 
-Get-BrowserPermissions.ps1
+# Maintenance Profiles and Schedules
 
-Write-ObjProperties.ps1
+### Set-MaintenanceProfile
+Creates or updates a maintenance profile.
 
-Get-BitLockerKey.ps1
+### Get-MaintenanceProfile
+Returns a maintenance profile by name.
 
-Get-NetworkInfo.ps1
+### Get-MaintenanceProfiles
+Lists maintenance profiles.
 
-Convert-PrefixToMask.ps1
+### Remove-MaintenanceProfile
+Removes a maintenance profile.
 
-Format-Num.ps1
+### Log-MaintenanceProfiles
+Logs maintenance profile information.
 
-Get-WlanInterfaceInfo.ps1
+### Ensure-MaintenanceProfiles
+Ensures default maintenance profiles exist.
 
-Get-VlanInfoForAdapter.ps1
+### Initialize-MaintenanceProfiles
+Initializes maintenance profile storage and defaults.
 
-Get-NetworkAdapters.ps1
+### Set-DrAssetMaintenanceProfile
+Assigns a maintenance profile to an asset.
 
-Set-NetworkCategory.ps1
+### Set-MaintenanceSchedule
+Creates or updates a maintenance schedule.
 
-Block-PersonalMicrosoftAccounts.ps1
+### Get-MaintenanceSchedule
+Returns a maintenance schedule.
 
-Add-LoggedInUserToAdmins.ps1
+### Log-MaintenanceSchedule
+Logs maintenance schedule information.
 
-Debug-MinidumpFiles.ps1
+### Initialize-MaintenanceSchedules
+Initializes maintenance schedule storage and defaults.
 
-Find-File.ps1
+### Ensure-MaintenanceSchedules
+Ensures maintenance schedules exist.
 
-Enable-Minidumps.ps1
+### Set-DrAssetMaintenanceSchedule
+Assigns a maintenance schedule to an asset.
 
-Get-WindowsVersion.ps1
+---
 
-Get-SecureBoot.ps1
+# Disk Cleanup and Storage Management
 
-Get-AVProducts.ps1
+### Get-DrDiskCleanupProfileStore
+Returns the disk cleanup profile store path.
 
-Get-Asset.ps1
+### New-DrDiskCleanupProfileObject
+Creates a disk cleanup profile object.
 
-Update-Asset.ps1
+### Save-DrDiskCleanupProfile
+Saves a disk cleanup profile.
 
-Get-SyncroAssetByName.ps1
+### Get-DrDiskCleanupProfile
+Returns a disk cleanup profile by name.
 
-Save-EncryptedApiKeyToRegistry.ps1
+### Get-DrDiskCleanupProfiles
+Lists disk cleanup profiles.
 
-Get-EncryptedApiKeyFromRegistry.ps1
+### Log-DrDiskCleanupProfiles
+Logs disk cleanup profile information.
 
-Get-EventLogsByLevelAndTime.ps1
+### Remove-DrDiskCleanupProfile
+Removes a disk cleanup profile.
 
-Get-EventLogsByLevelAndTimex.ps1
+### Ensure-DrDiskCleanupProfiles
+Ensures default disk cleanup profiles exist.
 
-Get-NumLockState.ps1
+### Initialize-DrDiskCleanupProfiles
+Initializes disk cleanup profile storage and defaults.
 
-Set-NumLockState.ps1
+### Get-DrDiskCleanupDecision
+Determines which cleanup profile should be used.
 
-Get-SyncroSafeMode.ps1
+### Invoke-DrDiskCleanup
+Runs profile-based disk cleanup.
 
-Set-SyncroSafeMode.ps1
+### Invoke-DrDiskCleanupProfile
+Executes cleanup using a specified disk cleanup profile.
 
-Install-DrPackage.ps1
+### Invoke-DrDiskCleanupV2
+Runs enhanced disk cleanup with profile logic, validation, and reporting.
 
-Show-HiddenFiles.ps1
+### Invoke-DrCleanup
+Runs broader cleanup actions using framework cleanup logic.
 
-Get-WifiConnection.ps1
+### Clean-DrFolder
+Safely cleans or deletes folder contents according to parameters.
 
-FindAndRun.ps1
+### Clear-DiskSpace
+Runs legacy disk cleanup logic.
 
-Locate-File.ps1
+### SearchAndDelete-Items
+Searches for and optionally deletes matching items.
 
-Count-RegistryEntries.ps1
+---
 
-Invoke-AdwCleaner.ps1
+# Storage Health and Storage Sense
 
-Optimize-Registry.ps1
+### Initialize-StorageHealthProfiles
+Initializes storage health profiles.
 
-Add-TicketFile.ps1
+### Set-StorageHealthProfile
+Creates or updates a storage health profile.
 
-Add-FilesToZip.ps1
+### Get-StorageHealthProfile
+Returns a storage health profile.
 
-New-RandomPassword1.ps1
+### Get-StorageHealthProfiles
+Lists storage health profiles.
 
-New-RandomPassword.ps1
+### Log-StorageHealthProfiles
+Logs storage health profile information.
 
-Hide-User.ps1
+### Ensure-StorageHealthProfiles
+Ensures storage health profiles exist.
 
-Add-DrLocalUser.ps1
+### Get-StorageHealth
+Returns current storage health information.
 
-Get-LastBootUpTime.ps1
+### Get-StorageHealth1
+Earlier storage health function retained in the module.
 
-Set-AssetField.ps1
+### Log-StorageHealth
+Logs storage health information.
 
-Set-AssetTicket.ps1
+### Get-ReclaimedStorageHealth
+Compares before and after storage health results.
 
-Set-PendingRestart.ps1
+### Get-DrDiskInfo
+Returns disk information.
 
-Reset-WindowsUpdate.ps1
+### Log-DrDiskInfo
+Logs disk information.
 
-Test-PendingRestart.ps1
+### Get-StorageSummary
+Returns storage summary information.
 
-Clear-BrowserHistory.ps1
+### Get-StorageMetrics
+Returns detailed storage metrics.
 
-Set-RestartNotification.ps1
+### Get-ReclaimedStorage
+Calculates reclaimed storage between before and after measurements.
 
-Set-UpdateSettings.ps1
+### Set-StorageSensePolicy
+Applies a Storage Sense policy.
 
-Stop-Processes.ps1
+### Set-StorageSenseProfile
+Creates or updates a Storage Sense profile.
 
-Register-Windows.ps1
+### Get-StorageSenseProfile
+Returns a Storage Sense profile.
 
-Get-DumpType.ps1
+### Get-StorageSenseProfiles
+Lists Storage Sense profiles.
 
-Set-DumpType.ps1
+### Remove-StorageSenseProfile
+Removes a Storage Sense profile.
 
-Get-DumpPaths0.ps1
+### Initialize-StorageSenseProfiles
+Initializes Storage Sense profile storage and defaults.
 
-Get-DumpPaths.ps1
+### Ensure-StorageSenseProfiles
+Ensures Storage Sense profiles exist.
 
-Add-IfActionable.ps1
+### Log-StorageSenseProfiles
+Logs Storage Sense profile information.
 
-Debug-SingleDumpFile.ps1
+---
 
-Debug-DumpFiles.ps1
+# Security and Protection
 
-Start-SpeedTest.ps1
+### Set-AppBrowserControl
+Configures App & Browser Control settings.
 
-Get-PrinterStatus.ps1
+### Get-AppBrowserControl
+Returns App & Browser Control settings.
 
-SearchAndDelete-Items.ps1
+### Log-AppBrowserControl
+Logs App & Browser Control settings.
 
-Get-PaymentProfiles.ps1
+### Set-WindowsProtection
+Configures Windows protection settings.
 
-Get-DrCustomer.ps1
+### Get-WindowsProtection
+Returns Windows protection settings.
 
-Add-DrTicketTimerEntry.ps1
+### Log-WindowsProtection
+Logs Windows protection settings.
 
-Clean-DrFolder.ps1
+### Get-AVProducts
+Returns antivirus product information.
 
-Invoke-DrCleanup.ps1
+### Get-AVProductsV2
+Returns antivirus product information using alternate logic.
 
-Get-EventTimeDifferences.ps1
+### Log-AVProducts
+Logs antivirus product information.
 
-Get-PowerSourceInfo.ps1
+### Verify-AVProducts
+Verifies antivirus product state.
 
-Run-DISM.ps1
+### Evaluate-DrAVState
+Evaluates antivirus state and potential remediation needs.
 
-Get-TpmStatus.ps1
+### Get-SecureBoot
+Returns Secure Boot status.
 
-Get-DrMotherboardInfo.ps1
+### Get-TpmStatus
+Returns TPM status.
 
-Get-DrCpuAndMemoryInfo.ps1
+### Log-TpmStatus
+Logs TPM status.
 
-Set-EdgeExtension.ps1
+### Get-BitLockerKey
+Retrieves BitLocker recovery key information.
 
-Remove-MaliciousBrowser.ps1
+### Get-WifiPassword
+Returns stored Wi-Fi password information when requested.
 
-Set-StoreApp.ps1
+---
 
-Manage-StoreApp.ps1
+# Windows Repair and System Maintenance
 
-Install-UpdateWinget.ps1
+### Start-SFC
+Runs System File Checker in verify or repair mode.
 
-Manage-Service.ps1
+### Run-DISM
+Runs DISM repair operations.
 
-DrSecurityReviewx.ps1
+### Start-ChkDsk
+Runs ChkDsk-related checks or repairs.
 
-Log-ObjProperties.ps1
+### Reset-WindowsUpdate
+Resets Windows Update components.
 
-New-Indent.ps1
+### Test-DrWmiRepositoryHealth
+Tests WMI repository health.
 
-Should-MaskKey.ps1
+### Recommend-DrWmiRepositoryRepair
+Creates a recommendation to repair WMI repository problems.
 
-Format-Value.ps1
+### Reset-DrWmiRepository
+Repairs or resets the WMI repository.
 
-Get-ObjId.ps1
+### Set-PendingRestart
+Sets a pending restart indicator.
 
-Join-ComputerToDomain.ps1
+### Get-PendingRestart
+Returns pending restart status and reasons.
 
-Process-DumpFile.ps1
+### Log-PendingRestart
+Logs pending restart status.
 
-Reset-WindowsUpdate.ps1
+### Restart-DrComputer
+Schedules or performs a controlled restart.
 
-Get-TicketAssetIds.ps1
+### Restart-DrComputerInteractive
+Runs interactive restart notification behavior.
 
-Set-DrAssetIdRegistry.ps1
+### Set-RestartNotification
+Configures restart notification behavior.
 
-Get-DrAssetIdRegistry.ps1
+### Set-UpdateSettings
+Configures Windows Update-related settings.
 
-Find-OrInstall-WinDbg.ps1
+### Get-FastBootSetting
+Returns Fast Startup setting state.
 
-_Find-WinDbg.ps1
+### Set-FastBootSetting
+Configures Fast Startup.
 
-Process-MinidumpFiles.ps1
+---
 
-Try-Extract.ps1
+# Notifications and User Session
 
-Try-ExtractBlock.ps1
+### Show-Notification
+Displays a notification.
 
-Sync-DebugSymbols.ps1
+### Show-UserNotification
+Displays a user-session notification.
 
-Resolve-ModulePath.ps1
+### Get-InteractiveUser
+Returns the active console user.
 
-New-ExportModuleExportArray.ps1
+### Get-LoggedInUser
+Returns the current logged-in user context.
+
+### Get-DrLoggedInUserSession
+Returns a logged-in user session suitable for user-context execution.
+
+### Invoke-DrUserSessionLauncher
+Launches commands in the interactive user session.
+
+### Invoke-DrUserSessionLauncher1
+Earlier user-session launch function retained in the module.
+
+---
+
+# Networking
+
+### Get-DnsServerInfo
+Returns DNS server information.
+
+### Get-NetworkInfo
+Returns network configuration information.
+
+### Log-NetworkInfo
+Logs network configuration information.
+
+### Get-NetworkAdapters
+Returns network adapter information.
+
+### Set-NetworkCategory
+Sets network category such as public or private.
+
+### Get-WifiConnection
+Returns Wi-Fi connection details.
+
+### Start-SpeedTest
+Runs network speed testing.
+
+---
+
+# Browser and User Experience Settings
+
+### Get-BrowserPermissions
+Retrieves browser permission settings for Edge and Chrome profiles.
+
+### Remove-MaliciousBrowser
+Removes targeted malicious or unwanted browser components.
+
+### Get-VendorRootsFromBrowserNames
+Finds vendor folders associated with targeted browser names.
+
+### Get-AllUserLocalAppData
+Returns LocalAppData paths for all real user profiles.
+
+### Get-LocalRootFromExePath
+Resolves the local application root from an executable path.
+
+### Get-TaskCacheTreeMatches
+Finds scheduled task cache matches.
+
+### Clear-BrowserHistory
+Clears browser history according to selected options.
+
+### Show-HiddenFiles
+Toggles hidden file visibility.
+
+### Set-HiddenFiles
+Configures hidden file settings.
+
+### Set-EdgeExtension
+Installs or removes Edge extensions.
+
+---
+
+# Accounts, Identity, and Access
+
+### Get-DrMicrosoftAccounts
+Returns Microsoft account-related information.
+
+### Log-DrMicrosoftAccounts
+Logs Microsoft account-related information.
+
+### Block-PersonalMicrosoftAccounts
+Enables or disables blocking of personal Microsoft accounts.
+
+### Get-LocalAccountSnapshot
+Captures local account state.
+
+### Get-LocalAccountBaseline
+Returns a local account baseline.
+
+### Compare-AccountSnapshots
+Compares current local accounts against a baseline.
+
+### Compare-AccountSnapshots0
+Earlier account snapshot comparison function retained in the module.
+
+### Add-LoggedInUserToAdmins
+Adds the logged-in user to the local Administrators group.
+
+### Add-DrLocalUser
+Creates a local user.
+
+### New-DrDomainUser
+Creates a domain user.
+
+### Hide-User
+Hides or shows a Windows user account.
+
+### Join-ComputerToDomain
+Joins a computer to a domain.
+
+### New-DrPassword
+Creates a password.
+
+### New-RandomPassword
+Creates a random password.
+
+### New-RandomPassword1
+Earlier random password function retained in the module.
+
+### Save-EncryptedApiKeyToRegistry
+Stores an encrypted API key in the registry.
+
+### Get-EncryptedApiKeyFromRegistry
+Retrieves an encrypted API key from the registry.
+
+---
+
+# Diagnostics, Events, and Dumps
+
+### Get-EventLogsByLevelAndTime
+Retrieves Windows event logs by level and time window.
+
+### Get-EventLogsByLevelAndTimex
+Alternate event log retrieval function.
+
+### Get-EventTimeDifferences
+Analyzes event log time differences.
+
+### Enable-Minidumps
+Enables minidump creation.
+
+### Debug-MinidumpFiles
+Processes minidump files for debugging.
+
+### Get-DumpType
+Returns configured dump type.
+
+### Set-DumpType
+Sets dump type configuration.
+
+### Get-DumpPaths
+Returns actionable dump file paths.
+
+### Get-DebugTool
+Finds an installed supported dump analysis tool.
+
+### Invoke-DumpFileProcessing
+Processes dump files using an available debugger.
+
+### Get-DumpFileCount
+Counts available dump files.
+
+### Test-DumpFilesExist
+Returns whether dump files exist.
+
+### Recommend-DumpFileProcessing
+Creates a recommendation to process dump files.
+
+### Get-DrContent
+Reads redirected console output content.
+
+---
+
+# Hardware and System Information
+
+### Get-WindowsVersion
+Returns Windows version information.
+
+### Get-WindowsVersionV2
+Returns Windows version information using registry data.
+
+### Test-WindowsVersion
+Tests Windows version and optionally creates a recommendation.
+
+### Log-WindowsVersion
+Logs Windows version information.
+
+### Test-Windows11Readiness
+Tests readiness for Windows 11.
+
+### Get-LastBootUpTime
+Returns last boot time.
+
+### Get-CPUTemperature
+Returns CPU temperature information when available.
+
+### Test-CPUTemperature
+Tests CPU temperature against a threshold.
+
+### Get-DrMotherboardInfo
+Returns motherboard and BIOS information.
+
+### Get-DrCpuAndMemoryInfo
+Returns CPU and memory information.
+
+### Get-PowerSourceInfo
+Returns power source information.
+
+### Get-PrinterStatus
+Returns printer status information.
+
+### Get-NumLockState
+Returns Num Lock setting state.
+
+### Set-NumLockState
+Configures Num Lock state.
+
+### Get-SyncroSafeMode
+Returns Syncro safe mode service state.
+
+### Set-SyncroSafeMode
+Configures Syncro safe mode service behavior.
+
+### Test-UEFIBoot
+Tests whether the system is using UEFI boot.
+
+---
+
+# Software and Packages
+
+### Install-DrPackage
+Installs a DrModule package.
+
+### Install-UpdateWinget
+Installs or updates winget/App Installer support.
+
+### Set-StoreApp
+Installs, updates, removes, repairs, or resets Microsoft Store applications.
+
+### Manage-Service
+Manages Windows services.
+
+### Stop-Processes
+Stops selected processes.
+
+### Invoke-AdwCleaner
+Runs AdwCleaner-related cleanup.
+
+### Optimize-Registry
+Runs registry optimization.
+
+### Register-Windows
+Registers Windows using a product key.
+
+---
+
+# File and Folder Utilities
+
+### Ensure-Folder
+Ensures that a folder exists.
+
+### Find-File
+Finds a file by path and name.
+
+### Locate-File
+Locates a file by path and name.
+
+### FindAndRun
+Finds and runs a file.
+
+### Add-FilesToZip
+Adds files to a ZIP archive.
+
+### Count-RegistryEntries
+Counts entries in a registry export file.
+
+---
+
+# Content and Recommendations Settings
+
+### Set-ContentRecommendations
+Configures Windows content recommendations.
+
+### Get-ContentRecommendations
+Returns Windows content recommendation settings.
+
+### Log-ContentRecommendations
+Logs content recommendation settings.
+
+---
+
+# Miscellaneous
+
+### Compare-Version
+Compares version values.
+
+### Get-Alerts
+Returns Syncro alerts.
+
+### Get-PaymentProfiles
+Returns payment profile information.
+
+### Get-TpmStatus
+Returns TPM status information.
+
+### DrSecurityReviewx
+Runs a security review function retained in the module.
+
+### New-ExportModuleExportArray
+Builds the module export function array.
+
